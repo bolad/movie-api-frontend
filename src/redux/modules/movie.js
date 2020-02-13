@@ -1,5 +1,6 @@
-import {all, out, call, takeLatest} from "redux-saga/effects"
-import {handleActions, createAction} from "redux-actions"
+import { all, out, call, takeLatest } from "redux-saga/effects"
+import { handleActions, createAction } from "redux-actions"
+import { fetchMoviesData } from "../../api/movie"
 
 //actions
 export const FETCH_MOVIES = "movie-frontend/movie/FETCH_MOVIES"
