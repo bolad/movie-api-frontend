@@ -45,4 +45,23 @@ const movieReducer = handleActions(
   getInitialState()
 )
 
+// Action Creators
 export default movieReducer
+export const requestMovieFetch = createAction(FETCH_MOVIES)
+export const succeededMoviesFetch = createAction(FETCH_MOVIES_SUCCEEDED)
+export const failedMoviesFetch = createAction(FETCH_MOVIES_FAILED)
+
+// Sagas
+export function* fetchMoviesSaga() {
+  try {
+    const payload = yield call(fetchMoviesData)
+    yield put(succeededMoviesFetch(payload))
+  } catch (error) {
+      yield put(failedMoviesFetch(error.message))
+  }
+}
+
+// Main Saga
+export function* movieSaga() {
+  yield all([takeLatest(FETCH_MOVIES, fetchMoviesSaga)])
+}
